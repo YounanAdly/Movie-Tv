@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/sort_spinner"
+        android:icon="@drawable/bar"
+        android:title="title 1"
+        app:showAsAction="ifRoom">
+
+        <menu>
+
+            <item
+                android:id="@+id/now_playing"
+                android:title="Now Playing"
+                app:showAsAction="never" />
+
+
+            <item
+                android:id="@+id/popular"
+                android:title="Popular"
+                app:showAsAction="never"/>
+
+            <item
+                android:id="@+id/top_rated"
+                android:title="Top Rated"
+                app:showAsAction="never"/>
+
+            <item
+                android:id="@+id/upcoming"
+                android:title="Upcoming"
+                app:showAsAction="never"/>
+
+        </menu>
+
+    </item>
+
+
+
+</menu>

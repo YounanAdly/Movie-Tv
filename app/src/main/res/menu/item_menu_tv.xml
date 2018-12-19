@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/sort_spinner"
+        android:icon="@drawable/bar"
+        android:title="title 1"
+        app:showAsAction="ifRoom">
+
+        <menu>
+
+            <item
+                android:id="@+id/airing_today"
+                android:title="Airing Today"
+                app:showAsAction="never" />
+
+
+            <item
+                android:id="@+id/on_air"
+                android:title="On Air"
+                app:showAsAction="never"/>
+
+            <item
+                android:id="@+id/popular_tv"
+                android:title="Popular"
+                app:showAsAction="never"/>
+
+            <item
+                android:id="@+id/top_rated_tv"
+                android:title="Top Rated"
+                app:showAsAction="never"/>
+
+
+
+        </menu>
+
+    </item>
+
+
+
+</menu>

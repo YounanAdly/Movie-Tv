@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:elevation="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="18dp"
+    android:layout_marginBottom="10dp">
+
+
+    <ImageView
+        android:id="@+id/image_movie"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:background="@android:color/white"
+        android:elevation="30dp"
+        android:src="@drawable/antman" />
+
+
+
+    <TextView
+        android:id="@+id/name_movie"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="16dp"
+        android:text="name Movie"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toRightOf="@id/image_movie"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/imdb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/imdb"
+        app:layout_constraintLeft_toRightOf="@id/image_movie"
+        app:layout_constraintTop_toBottomOf="@id/name_movie" />
+
+
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginLeft="24dp"
+        android:text="7.7"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toRightOf="@id/imdb"
+        app:layout_constraintTop_toBottomOf="@+id/name_movie" />
+
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintTop_toBottomOf="@id/imdb"
+        app:layout_constraintLeft_toRightOf="@id/image_movie"
+        android:text="date"
+        android:textSize="15sp" />
+
+
+</android.support.constraint.ConstraintLayout>

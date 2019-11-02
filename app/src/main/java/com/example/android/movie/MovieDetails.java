@@ -29,6 +29,8 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -48,6 +50,7 @@ public class MovieDetails extends YouTubeBaseActivity {
     private ImageView imageMovie;
     private TextView date;
     private TextView rating;
+    private TextView overview;
     private ArrayList<Result> results;
     private ArrayList<Key> triler;
     private ArrayList<Reviews> reviews;
@@ -106,6 +109,7 @@ public class MovieDetails extends YouTubeBaseActivity {
 
 
                 name = (TextView) findViewById(R.id.name_movie);
+                overview = (TextView) findViewById(R.id.overview);
                 rating = (TextView) findViewById(R.id.rating);
                 date = (TextView) findViewById(R.id.date_det);
                 imageMovie = (ImageView) findViewById(R.id.imageView);
@@ -113,6 +117,7 @@ public class MovieDetails extends YouTubeBaseActivity {
 
                 date.setText(selectedMovie.getReleaseDate());
                 name.setText(selectedMovie.getTitle());
+                overview.setText(selectedMovie.getOverview());
 
                 rating.setText(String.valueOf(selectedMovie.getVoteAverage()));
 

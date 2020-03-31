@@ -2,7 +2,6 @@ package com.example.android.movie.Adapter.Movie;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,45 +10,39 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.movie.Common.Common;
-import com.example.android.movie.Interface.ItemClickListener;
-import com.example.android.movie.Model.Result;
-import com.example.android.movie.MovieDetails;
+import com.example.android.movie.ui.Movie.MovieDetails;
+import com.example.android.movie.Pojo.Result;
 import com.example.android.movie.R;
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
+import com.example.android.movie.data.MovieClient;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by yuyu on 11-Nov-18.
- */
+import androidx.recyclerview.widget.RecyclerView;
+
 
 public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.MyViewHolder> {
 
-    private ArrayList<Result> mMovies;
-
-    private Context context;
+    private List<Result> mMovies = new ArrayList<>();
     public static final String SELECTED_MOVIE = "selected_movie";
+    private Context context;
     private int lastPosition = -1;
 
-    public ListMovieAdapter(ArrayList<Result> mMovies, Context context) {
-        this.mMovies = mMovies;
+    public ListMovieAdapter(Context context) {
         this.context = context;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.list_views, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-         String image = Common.IMAGE_LOAD + mMovies.get(position).getPosterPath();
-
+        String image = MovieClient.IMAGE_LOAD + mMovies.get(position).getPosterPath();
         Picasso.with(context)
                 .load(image)
                 .into(holder.imageMovie);
@@ -59,31 +52,11 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.MyVi
         Animation animation = AnimationUtils.loadAnimation(context,
                 (position > lastPosition) ? R.anim.up_from_bottom
                         : R.anim.down_from_top);
-        holder.itemView.startAnimation(animation);
         lastPosition = position;
-
+        holder.itemView.startAnimation(animation);
         holder.nameMovie.setText(mMovies.get(position).getTitle());
-
-
-
         holder.rating.setText(String.valueOf(mMovies.get(position).getVoteAverage()));
-
         holder.dateMovie.setText(mMovies.get(position).getReleaseDate());
-
-        holder.setItemClickListener(new ItemClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Intent intent = new Intent(context, MovieDetails.class);
-                Result result = mMovies.get(position);
-
-
-                intent.putExtra(SELECTED_MOVIE, result);
-                context.startActivity(intent);
-
-            }
-        });
-
-
     }
 
     @Override
@@ -91,13 +64,16 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.MyVi
         return mMovies.size();
     }
 
+    public void setList(List<Result> mMovies) {
+        this.mMovies = mMovies;
+        notifyDataSetChanged();
+    }
+
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageMovie;
         TextView nameMovie;
         TextView rating;
         TextView dateMovie;
-        ItemClickListener itemClickListener;
-
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -108,13 +84,13 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.MyVi
             itemView.setOnClickListener(this);
         }
 
-        public void setItemClickListener(ItemClickListener itemClickListener) {
-            this.itemClickListener = itemClickListener;
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(context, MovieDetails.class);
+            Result result = mMovies.get(getAdapterPosition());
+            intent.putExtra(SELECTED_MOVIE, result);
+            context.startActivity(intent);
         }
 
-        @Override
-        public void onClick(View v) {
-            itemClickListener.onClick(v, getAdapterPosition());
-        }
     }
 }

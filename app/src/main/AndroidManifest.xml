@@ -3,6 +3,7 @@
     package="com.example.android.movie">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,22 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainButtonChoose">
+        <activity android:name=".ui.MainButtonChoose">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.Movie.MainActivity"/>
+        <activity android:name=".ui.Movie.MovieDetails"/>
+        <activity android:name=".ui.Tv.TvMain"
+            android:label="Tv Series"/>
+        <activity android:name=".ui.Tv.TvDetails"
+            android:label="Tv Series"/>
 
-        <activity android:name=".MainActivity" />
-        <activity android:name=".MovieDetails" />
-
-        <activity
-            android:name=".TvMain"
-            android:label="Tv Series">
-        </activity>
-        <activity android:name=".TvDetails" />
     </application>
 
 </manifest>

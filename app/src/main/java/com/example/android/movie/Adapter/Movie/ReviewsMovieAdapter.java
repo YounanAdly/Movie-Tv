@@ -1,40 +1,35 @@
 package com.example.android.movie.Adapter.Movie;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.example.android.movie.Model.MovieReviews.Reviews;
+import com.example.android.movie.Pojo.MovieReviews.Reviews;
 import com.example.android.movie.R;
 
 import java.util.ArrayList;
-
-/**
- * Created by yuyu on 18-Nov-18.
- */
+import java.util.List;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ReviewsMovieAdapter extends RecyclerView.Adapter<ReviewsMovieAdapter.MyViewHolder> {
 
-    private ArrayList<Reviews> reviews;
+    private List<Reviews> reviews = new ArrayList<>();
     private Context context;
 
-    public ReviewsMovieAdapter(ArrayList<Reviews> reviews, Context context) {
-        this.reviews = reviews;
+    public ReviewsMovieAdapter(Context context) {
         this.context = context;
     }
 
     @Override
-    public ReviewsMovieAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.reviews, parent, false);
-        return new ReviewsMovieAdapter.MyViewHolder(view);
+        return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ReviewsMovieAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.content.setText(reviews.get(position).getContent());
         holder.author.setText(reviews.get(position).getAuthor());
 
@@ -43,6 +38,11 @@ public class ReviewsMovieAdapter extends RecyclerView.Adapter<ReviewsMovieAdapte
     @Override
     public int getItemCount() {
         return reviews.size();
+    }
+
+    public void setList(List<Reviews> reviews) {
+        this.reviews = reviews;
+        notifyDataSetChanged();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

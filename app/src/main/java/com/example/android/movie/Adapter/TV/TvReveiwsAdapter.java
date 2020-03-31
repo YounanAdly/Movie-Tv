@@ -1,27 +1,26 @@
 package com.example.android.movie.Adapter.TV;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.android.movie.Model.TvReviews.Reviews;
+import com.example.android.movie.Pojo.TvReviews.Reviews;
 import com.example.android.movie.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by yuyu on 21-Nov-18.
- */
+import androidx.recyclerview.widget.RecyclerView;
+
 
 public class TvReveiwsAdapter extends RecyclerView.Adapter<TvReveiwsAdapter.MyViewHolder> {
-    private ArrayList<Reviews> tvReviews;
+
+    private List<Reviews> tvReviews = new ArrayList<>();
     private Context context;
 
-    public TvReveiwsAdapter(ArrayList<Reviews> reviews, Context context) {
-        this.tvReviews = reviews;
+    public TvReveiwsAdapter(Context context) {
         this.context = context;
     }
 
@@ -43,13 +42,19 @@ public class TvReveiwsAdapter extends RecyclerView.Adapter<TvReveiwsAdapter.MyVi
         return tvReviews.size();
     }
 
+    public void setList(List<Reviews> tvReviews) {
+        this.tvReviews = tvReviews;
+        notifyDataSetChanged();
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView content;
         TextView author;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            this.content = (TextView)itemView.findViewById(R.id.content);
-            this.author = (TextView)itemView.findViewById(R.id.author);
+            this.content = (TextView) itemView.findViewById(R.id.content);
+            this.author = (TextView) itemView.findViewById(R.id.author);
         }
     }
 }

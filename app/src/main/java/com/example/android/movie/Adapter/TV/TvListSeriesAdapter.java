@@ -2,7 +2,6 @@ package com.example.android.movie.Adapter.TV;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,29 +10,27 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.movie.Common.Common;
-import com.example.android.movie.Interface.ItemClickListener;
-import com.example.android.movie.Model.TV.TvResult;
+import com.example.android.movie.Pojo.TV.TvResult;
 import com.example.android.movie.R;
-import com.example.android.movie.TvDetails;
+import com.example.android.movie.data.MovieClient;
+import com.example.android.movie.ui.Tv.TvDetails;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by yuyu on 21-Nov-18.
- */
+import androidx.recyclerview.widget.RecyclerView;
+
 
 public class TvListSeriesAdapter extends RecyclerView.Adapter<TvListSeriesAdapter.MyViewHolder> {
 
-    private ArrayList<TvResult> tvResults;
+    private List<TvResult> tvResults = new ArrayList<>();
     private Context context;
 
     public static final String SELECTED_TV = "selected_tv";
     private int lastPosition = -1;
 
-    public TvListSeriesAdapter(ArrayList<TvResult> tvResults, Context context) {
-        this.tvResults = tvResults;
+    public TvListSeriesAdapter(Context context) {
         this.context = context;
     }
 
@@ -46,42 +43,22 @@ public class TvListSeriesAdapter extends RecyclerView.Adapter<TvListSeriesAdapte
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-
         //Animation Scroll
         Animation animation = AnimationUtils.loadAnimation(context,
                 (position > lastPosition) ? R.anim.up_from_bottom
                         : R.anim.down_from_top);
         holder.itemView.startAnimation(animation);
         lastPosition = position;
-        //////////////////////
 
-        String imagee = Common.IMAGE_LOAD + tvResults.get(position).getPosterPath();
-
+        String imagee = MovieClient.IMAGE_LOAD + tvResults.get(position).getPosterPath();
         Picasso.with(context)
                 .load(imagee)
                 .into(holder.imagetv);
 
         holder.nametv.setText(tvResults.get(position).getName());
-
         holder.ratingtv.setText(String.valueOf(tvResults.get(position).getVoteAverage()));
-
-
-
-
         holder.datetv.setText(tvResults.get(position).getFirstAirDate());
 
-        holder.setItemClickListener(new ItemClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Intent intent = new Intent(context, TvDetails.class);
-                TvResult tvResult = tvResults.get(position);
-
-
-                intent.putExtra(SELECTED_TV, tvResult);
-                context.startActivity(intent);
-
-            }
-        });
     }
 
     @Override
@@ -89,12 +66,17 @@ public class TvListSeriesAdapter extends RecyclerView.Adapter<TvListSeriesAdapte
         return tvResults.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+    public void setList(List<TvResult> tvResults) {
+        this.tvResults = tvResults;
+        notifyDataSetChanged();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imagetv;
         TextView nametv;
         TextView ratingtv;
         TextView datetv;
-        ItemClickListener itemClickListener;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -105,13 +87,13 @@ public class TvListSeriesAdapter extends RecyclerView.Adapter<TvListSeriesAdapte
             itemView.setOnClickListener(this);
         }
 
-        public void setItemClickListener(ItemClickListener itemClickListener) {
-            this.itemClickListener = itemClickListener;
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(context, TvDetails.class);
+            TvResult tvResult = tvResults.get(getAdapterPosition());
+            intent.putExtra(SELECTED_TV, tvResult);
+            context.startActivity(intent);
         }
 
-        @Override
-        public void onClick(View v) {
-            itemClickListener.onClick(v, getAdapterPosition());
-        }
     }
 }

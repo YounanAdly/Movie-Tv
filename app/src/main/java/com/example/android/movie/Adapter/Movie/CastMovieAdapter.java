@@ -1,34 +1,29 @@
 package com.example.android.movie.Adapter.Movie;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.movie.Common.Common;
-import com.example.android.movie.Model.MovieCast.Cast;
-
+import com.example.android.movie.Pojo.MovieCast.Cast;
 import com.example.android.movie.R;
-import com.squareup.picasso.MemoryPolicy;
+import com.example.android.movie.data.MovieClient;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by yuyu on 15-Nov-18.
- */
+import androidx.recyclerview.widget.RecyclerView;
+
 
 public class CastMovieAdapter extends RecyclerView.Adapter<CastMovieAdapter.MyViewHolder> {
 
-    private ArrayList<Cast> cast;
-
+    private List<Cast> cast = new ArrayList<>();
     private Context context;
 
-    public CastMovieAdapter(ArrayList<Cast> cast, Context context) {
-        this.cast = cast;
+    public CastMovieAdapter(Context context) {
         this.context = context;
     }
 
@@ -37,7 +32,7 @@ public class CastMovieAdapter extends RecyclerView.Adapter<CastMovieAdapter.MyVi
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.cast, parent, false);
-        return new CastMovieAdapter.MyViewHolder(view);
+        return new MyViewHolder(view);
     }
 
     @Override
@@ -45,10 +40,9 @@ public class CastMovieAdapter extends RecyclerView.Adapter<CastMovieAdapter.MyVi
 
 
         holder.name.setText(cast.get(position).getName());
-
         holder.actorChar.setText(cast.get(position).getCharacter());
 
-         String image = Common.IMAGE_LOAD + cast.get(position).getProfilePath();
+        String image = MovieClient.IMAGE_LOAD + cast.get(position).getProfilePath();
 
         Picasso.with(context)
                 .load(image)
@@ -59,6 +53,11 @@ public class CastMovieAdapter extends RecyclerView.Adapter<CastMovieAdapter.MyVi
     @Override
     public int getItemCount() {
         return cast.size();
+    }
+
+    public void setList(List<Cast> cast) {
+        this.cast = cast;
+        notifyDataSetChanged();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
 
 
     <com.github.abdularis.civ.CircleImageView
         android:id="@+id/cast_image"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:paddingLeft="5dp"
+        android:layout_marginStart="5dp"
         app:strokeColor="@color/colorPrimaryDark"
-        app:strokeWidth="2px" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
-        android:text="Actor Name"
+        android:text="johannes haukur johanesson"
         android:textColor="@android:color/white"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -30,18 +32,16 @@
 
     <TextView
         android:id="@+id/actor_char"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:layout_marginLeft="-8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="5dp"
         android:text="Actor Name"
         android:textColor="@android:color/white"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cast_image"
-        app:layout_constraintTop_toTopOf="@+id/name" />
+        app:layout_constraintLeft_toRightOf="@id/cast_image"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

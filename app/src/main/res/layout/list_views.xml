@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,7 +17,9 @@
         android:layout_height="150dp"
         android:background="@android:color/white"
         android:elevation="30dp"
-        android:src="@drawable/antman" />
+        android:src="@drawable/antman"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
 
 
@@ -31,7 +31,7 @@
         android:paddingLeft="8dp"
         android:paddingTop="16dp"
         android:text="name Movie"
-        android:textSize="15sp"
+        android:textSize="20sp"
         app:layout_constraintLeft_toRightOf="@id/image_movie"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,4 +69,4 @@
         android:textSize="15sp" />
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

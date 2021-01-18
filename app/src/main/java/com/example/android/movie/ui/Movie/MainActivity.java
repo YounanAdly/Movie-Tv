@@ -12,10 +12,14 @@ import com.example.android.movie.databinding.ActivityMainBinding;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import dagger.hilt.EntryPoint;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
@@ -27,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
+        movieViewModel = new ViewModelProvider(this).get(MovieViewModel.class);
         movieViewModel.getPopular();
 
         MovieViewModel.moviesMutableLiveData.observe(this, moviesList -> mAdapter.setList(moviesList.getResults()));
@@ -61,22 +65,18 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.now_playing:
                 movieViewModel.getNowPlaying();
-                MovieViewModel.moviesMutableLiveData.observe(this, moviesList -> mAdapter.setList(moviesList.getResults()));
                 return true;
 
             case R.id.popular:
                 movieViewModel.getPopular();
-                MovieViewModel.moviesMutableLiveData.observe(this, moviesList -> mAdapter.setList(moviesList.getResults()));
                 return true;
 
             case R.id.top_rated:
                 movieViewModel.getTopRated();
-                MovieViewModel.moviesMutableLiveData.observe(this, moviesList -> mAdapter.setList(moviesList.getResults()));
                 return true;
 
             case R.id.upcoming:
                 movieViewModel.getUpcoming();
-                MovieViewModel.moviesMutableLiveData.observe(this, moviesList -> mAdapter.setList(moviesList.getResults()));
                 return true;
         }
         return super.onOptionsItemSelected(item);

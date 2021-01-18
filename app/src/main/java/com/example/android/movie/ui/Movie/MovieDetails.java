@@ -8,17 +8,20 @@ import com.example.android.movie.Adapter.Movie.ReviewsMovieAdapter;
 import com.example.android.movie.Pojo.Result;
 import com.example.android.movie.R;
 import com.example.android.movie.ViewModel.MovieViewModel;
-import com.example.android.movie.data.MovieClient;
+import com.example.android.movie.repository.Repository;
 import com.example.android.movie.databinding.MovieDetailsBinding;
 import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class MovieDetails extends AppCompatActivity {
     MovieDetailsBinding mBinding;
     public static Result selectedMovie;
@@ -34,7 +37,7 @@ public class MovieDetails extends AppCompatActivity {
 
         selectedMovie = getIntent().getParcelableExtra(ListMovieAdapter.SELECTED_MOVIE);
 
-        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
+        movieViewModel = new ViewModelProvider(this).get(MovieViewModel.class);
 
 
         MovieViewModel.moviesMutableLiveData.observe(this,moviesList ->  {
@@ -44,7 +47,7 @@ public class MovieDetails extends AppCompatActivity {
                 mBinding.overview.setText(selectedMovie.getOverview());
 
                 Picasso.with(MovieDetails.this)
-                        .load(MovieClient.IMAGE_LOAD + selectedMovie.getPosterPath())
+                        .load(Repository.IMAGE_LOAD + selectedMovie.getPosterPath())
                         .into(mBinding.movieImage);
         });
 

@@ -14,10 +14,11 @@ import androidx.databinding.DataBindingUtil;
 
 public class MainButtonChoose extends AppCompatActivity implements View.OnClickListener {
     MainButtonBinding mBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this,R.layout.main_button);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.main_button);
 
         mBinding.movieButton.setOnClickListener(this);
         mBinding.tvButton.setOnClickListener(this);

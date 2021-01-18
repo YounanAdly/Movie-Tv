@@ -13,10 +13,13 @@ import com.example.android.movie.databinding.TvMainBinding;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class TvMain extends AppCompatActivity {
     TvViewModel tvViewModel;
     TvMainBinding mBinding;
@@ -27,7 +30,7 @@ public class TvMain extends AppCompatActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.tv_main);
 
 
-        tvViewModel = ViewModelProviders.of(this).get(TvViewModel.class);
+        tvViewModel = new ViewModelProvider(this).get(TvViewModel.class);
         tvViewModel.getTvPopular();
 
         TvViewModel.tvMutableLiveData.observe(this,tvList -> mAdapter.setList(tvList.getTvResults()));
@@ -59,22 +62,18 @@ public class TvMain extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.airing_today:
                 tvViewModel.getAiringToday();
-                TvViewModel.tvMutableLiveData.observe(this,tvList -> mAdapter.setList(tvList.getTvResults()));
                 return true;
 
             case R.id.on_air:
                 tvViewModel.getOnAir();
-                TvViewModel.tvMutableLiveData.observe(this,tvList -> mAdapter.setList(tvList.getTvResults()));
                 return true;
 
             case R.id.popular_tv:
                 tvViewModel.getTvPopular();
-                TvViewModel.tvMutableLiveData.observe(this,tvList -> mAdapter.setList(tvList.getTvResults()));
                 return true;
 
             case R.id.top_rated_tv:
                 tvViewModel.getTvTopRated();
-                TvViewModel.tvMutableLiveData.observe(this,tvList -> mAdapter.setList(tvList.getTvResults()));
                 return true;
         }
         return super.onOptionsItemSelected(item);

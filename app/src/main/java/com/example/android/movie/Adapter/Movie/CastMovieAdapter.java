@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.android.movie.Pojo.MovieCast.Cast;
 import com.example.android.movie.R;
-import com.example.android.movie.data.MovieClient;
+import com.example.android.movie.repository.Repository;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class CastMovieAdapter extends RecyclerView.Adapter<CastMovieAdapter.MyVi
         holder.name.setText(cast.get(position).getName());
         holder.actorChar.setText(cast.get(position).getCharacter());
 
-        String image = MovieClient.IMAGE_LOAD + cast.get(position).getProfilePath();
+        String image = Repository.IMAGE_LOAD + cast.get(position).getProfilePath();
 
         Picasso.with(context)
                 .load(image)

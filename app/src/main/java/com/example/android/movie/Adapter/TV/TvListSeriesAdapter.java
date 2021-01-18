@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.android.movie.Pojo.TV.TvResult;
 import com.example.android.movie.R;
-import com.example.android.movie.data.MovieClient;
+import com.example.android.movie.repository.Repository;
 import com.example.android.movie.ui.Tv.TvDetails;
 import com.squareup.picasso.Picasso;
 
@@ -50,7 +50,7 @@ public class TvListSeriesAdapter extends RecyclerView.Adapter<TvListSeriesAdapte
         holder.itemView.startAnimation(animation);
         lastPosition = position;
 
-        String imagee = MovieClient.IMAGE_LOAD + tvResults.get(position).getPosterPath();
+        String imagee = Repository.IMAGE_LOAD + tvResults.get(position).getPosterPath();
         Picasso.with(context)
                 .load(imagee)
                 .into(holder.imagetv);

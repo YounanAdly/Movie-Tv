@@ -5,72 +5,71 @@ import android.util.Log;
 import com.example.android.movie.Pojo.TV.TvList;
 import com.example.android.movie.Pojo.TvCast.TvCast;
 import com.example.android.movie.Pojo.TvReviews.TvReviews;
-import com.example.android.movie.data.MovieClient;
+import com.example.android.movie.repository.Repository;
 
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class TvViewModel extends ViewModel {
 
     private static final String TAG = "TvViewModel";
+    private final Repository repository;
 
     public static MutableLiveData<TvList> tvMutableLiveData = new MutableLiveData<>();
     public static MutableLiveData<TvCast> tvCastMutableLiveData = new MutableLiveData<>();
     public static MutableLiveData<TvReviews> tvReviewsMutableLiveData = new MutableLiveData<>();
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+    @ViewModelInject
+    public TvViewModel(Repository repository) {
+        this.repository = repository;
+    }
 
-    public void getTvPopular(){
-        Single<TvList> tvListSingle = MovieClient.getINSTANCE().getTvPopular()
+    public void getTvPopular() {
+        repository.getTvPopular()
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-        compositeDisposable.add(tvListSingle.subscribe(o -> tvMutableLiveData.setValue(o), e -> Log.d(TAG, "getMovies: " + e)));
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(tvList -> tvMutableLiveData.setValue(tvList), throwable -> Log.d(TAG, "getTvPopular: " + throwable.getMessage()));
     }
 
-    public void getAiringToday(){
-        Single<TvList> tvListSingle = MovieClient.getINSTANCE().getAiringToday()
+    public void getAiringToday() {
+        repository.getAiringToday()
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-        compositeDisposable.add(tvListSingle.subscribe(o -> tvMutableLiveData.setValue(o), e -> Log.d(TAG, "getMovies: " + e)));
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(tvList -> tvMutableLiveData.setValue(tvList), throwable -> Log.d(TAG, "getAiringToday: " + throwable));
     }
 
-    public void getTvTopRated(){
-        Single<TvList> tvListSingle = MovieClient.getINSTANCE().getTvTopRated()
+    public void getTvTopRated() {
+        repository.getTvTopRated()
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-        compositeDisposable.add(tvListSingle.subscribe(o -> tvMutableLiveData.setValue(o), e -> Log.d(TAG, "getMovies: " + e)));
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(tvList -> tvMutableLiveData.setValue(tvList), throwable -> Log.d(TAG, "getTvTopRated: " + throwable));
     }
 
-    public void getOnAir(){
-        Single<TvList> tvListSingle = MovieClient.getINSTANCE().getOnAir()
+    public void getOnAir() {
+        repository.getOnAir()
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-        compositeDisposable.add(tvListSingle.subscribe(o -> tvMutableLiveData.setValue(o), e -> Log.d(TAG, "getMovies: " + e)));
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(tvList -> tvMutableLiveData.setValue(tvList), throwable -> Log.d(TAG, "getOnAir: " + throwable));
     }
 
-    public void getTvCast(){
-        Single<TvCast> castSingle = MovieClient.getINSTANCE().getTvCast()
+    public void getTvCast() {
+        repository.getTvCast()
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-        compositeDisposable.add(castSingle.subscribe(o -> tvCastMutableLiveData.setValue(o), e -> Log.d(TAG, "getMovies: " + e)));
-
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(tvCast -> tvCastMutableLiveData.setValue(tvCast), throwable -> Log.d(TAG, "getTvCast: " + throwable));
     }
 
-    public void getTvReviews(){
-        Single<TvReviews> reviewsSingle = MovieClient.getINSTANCE().getTvReviews()
+    public void getTvReviews() {
+        repository.getTvReviews()
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-        compositeDisposable.add(reviewsSingle.subscribe(o -> tvReviewsMutableLiveData.setValue(o), e -> Log.d(TAG, "getMovies: " + e)));
-
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(reviews -> tvReviewsMutableLiveData.setValue(reviews), throwable -> Log.d(TAG, "getTvReviews: " + throwable));
     }
 
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        compositeDisposable.clear();
-    }
 }

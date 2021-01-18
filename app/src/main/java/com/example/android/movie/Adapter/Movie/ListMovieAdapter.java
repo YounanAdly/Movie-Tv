@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.example.android.movie.ui.Movie.MovieDetails;
 import com.example.android.movie.Pojo.Result;
 import com.example.android.movie.R;
-import com.example.android.movie.data.MovieClient;
+import com.example.android.movie.repository.Repository;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.MyVi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        String image = MovieClient.IMAGE_LOAD + mMovies.get(position).getPosterPath();
+        String image = Repository.IMAGE_LOAD + mMovies.get(position).getPosterPath();
         Picasso.with(context)
                 .load(image)
                 .into(holder.imageMovie);

@@ -8,18 +8,21 @@ import com.example.android.movie.Adapter.TV.TvReveiwsAdapter;
 import com.example.android.movie.Pojo.TV.TvResult;
 import com.example.android.movie.R;
 import com.example.android.movie.ViewModel.TvViewModel;
-import com.example.android.movie.data.MovieClient;
+import com.example.android.movie.repository.Repository;
 import com.example.android.movie.databinding.TvDetailsBinding;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class TvDetails extends AppCompatActivity {
 
     public static TvResult selectedMovie;
@@ -35,7 +38,7 @@ public class TvDetails extends AppCompatActivity {
 
         selectedMovie = getIntent().getParcelableExtra(TvListSeriesAdapter.SELECTED_TV);
 
-        tvViewModel = ViewModelProviders.of(this).get(TvViewModel.class);
+        tvViewModel = new ViewModelProvider(this).get(TvViewModel.class);
         tvViewModel.getTvPopular();
         tvViewModel.getTvCast();
         tvViewModel.getTvReviews();
@@ -48,7 +51,7 @@ public class TvDetails extends AppCompatActivity {
             mBinding.overview.setText(selectedMovie.getOverview());
 
             Picasso.with(TvDetails.this)
-                    .load(MovieClient.IMAGE_LOAD + selectedMovie.getPosterPath())
+                    .load(Repository.IMAGE_LOAD + selectedMovie.getPosterPath())
                     .into(mBinding.movieImage);
         });
 

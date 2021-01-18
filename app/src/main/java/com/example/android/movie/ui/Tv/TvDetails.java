@@ -2,12 +2,12 @@ package com.example.android.movie.ui.Tv;
 
 import android.os.Bundle;
 
-import com.example.android.movie.Adapter.TV.TvCastAdapter;
-import com.example.android.movie.Adapter.TV.TvListSeriesAdapter;
-import com.example.android.movie.Adapter.TV.TvReveiwsAdapter;
-import com.example.android.movie.Pojo.TV.TvResult;
+import com.example.android.movie.adapters.TV.TvCastAdapter;
+import com.example.android.movie.adapters.TV.TvListSeriesAdapter;
+import com.example.android.movie.adapters.TV.TvReveiwsAdapter;
+import com.example.android.movie.model.TV.TvResult;
 import com.example.android.movie.R;
-import com.example.android.movie.ViewModel.TvViewModel;
+import com.example.android.movie.viewmodel.TvViewModel;
 import com.example.android.movie.repository.Repository;
 import com.example.android.movie.databinding.TvDetailsBinding;
 import com.squareup.picasso.Picasso;
@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;

@@ -1,11 +1,11 @@
 package com.example.android.movie.repository;
 
-import com.example.android.movie.Pojo.MovieCast.MovieCast;
-import com.example.android.movie.Pojo.MovieReviews.MovieReviews;
-import com.example.android.movie.Pojo.MoviesList;
-import com.example.android.movie.Pojo.TV.TvList;
-import com.example.android.movie.Pojo.TvCast.TvCast;
-import com.example.android.movie.Pojo.TvReviews.TvReviews;
+import com.example.android.movie.model.MovieCast.MovieCast;
+import com.example.android.movie.model.MovieReviews.MovieReviews;
+import com.example.android.movie.model.MoviesList;
+import com.example.android.movie.model.TV.TvList;
+import com.example.android.movie.model.TvCast.TvCast;
+import com.example.android.movie.model.TvReviews.TvReviews;
 import com.example.android.movie.network.ApiService;
 import com.example.android.movie.ui.Movie.MovieDetails;
 import com.example.android.movie.ui.Tv.TvDetails;

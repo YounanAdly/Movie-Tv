@@ -2,12 +2,12 @@ package com.example.android.movie.ui.Movie;
 
 import android.os.Bundle;
 
-import com.example.android.movie.Adapter.Movie.CastMovieAdapter;
-import com.example.android.movie.Adapter.Movie.ListMovieAdapter;
-import com.example.android.movie.Adapter.Movie.ReviewsMovieAdapter;
-import com.example.android.movie.Pojo.Result;
+import com.example.android.movie.adapters.Movie.CastMovieAdapter;
+import com.example.android.movie.adapters.Movie.ListMovieAdapter;
+import com.example.android.movie.adapters.Movie.ReviewsMovieAdapter;
+import com.example.android.movie.model.Result;
 import com.example.android.movie.R;
-import com.example.android.movie.ViewModel.MovieViewModel;
+import com.example.android.movie.viewmodel.MovieViewModel;
 import com.example.android.movie.repository.Repository;
 import com.example.android.movie.databinding.MovieDetailsBinding;
 import com.squareup.picasso.Picasso;
@@ -15,7 +15,6 @@ import com.squareup.picasso.Picasso;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;

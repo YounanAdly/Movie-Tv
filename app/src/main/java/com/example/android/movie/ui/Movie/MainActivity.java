@@ -5,18 +5,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.example.android.movie.Adapter.Movie.ListMovieAdapter;
+import com.example.android.movie.adapters.Movie.ListMovieAdapter;
 import com.example.android.movie.R;
-import com.example.android.movie.ViewModel.MovieViewModel;
+import com.example.android.movie.viewmodel.MovieViewModel;
 import com.example.android.movie.databinding.ActivityMainBinding;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import dagger.hilt.EntryPoint;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint

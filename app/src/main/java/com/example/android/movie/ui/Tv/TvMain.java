@@ -5,16 +5,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.example.android.movie.Adapter.TV.TvListSeriesAdapter;
+import com.example.android.movie.adapters.TV.TvListSeriesAdapter;
 import com.example.android.movie.R;
-import com.example.android.movie.ViewModel.TvViewModel;
+import com.example.android.movie.viewmodel.TvViewModel;
 import com.example.android.movie.databinding.TvMainBinding;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import dagger.hilt.android.AndroidEntryPoint;
